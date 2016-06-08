@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>基于golang的后台管理系统</title>
+    <link rel="stylesheet" type="text/css" href="/static/js/jquery-easyui-1.4.3/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/static/js/jquery-easyui-1.4.3/themes/icon.css">
+    <script type="text/javascript" src="/static/js/jquery-easyui-1.4.3/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-easyui-1.4.3/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-easyui-1.4.3/locale/easyui-lang-zh_CN.js"></script>
+    <style>
+        .top{ background:url(/static/img/top.jpg) repeat-x; height:78px; position:relative;}
+        .top .title{ font-size:18px; color:#fff; font-family:\5FAE\8F6F\96C5\9ED1; position:absolute; left:20px; top:26px;}
+        .top .out{ position:absolute; top:30px; right:20px; font-size:12px; color:#fff;}
+        .top .out a{ color:#fff; text-decoration:none;}
+        .panel-body{
+            overflow: hidden;
+        }
+         *{ margin:0px; padding:0px; list-style:none;font-size: 12px;font-family: 宋体;}
+        .line20{ clear:both; font-size:0px; height:20px; overflow:hidden; }
+        .nlist-1 {line-height: 45px;color: #444;font-size: 14px}
+        .nlist-1 ul {padding: 0 0 0 20px;overflow:hidden;}
+        .nlist-1 ul:after {clear: both;content: ".";display: block;height: 0;visibility: hidden}
+        .nlist-1 ul li {float: left;margin-right: 10px;width: 32%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+        .nlist-2 {line-height: 30px;border: 1px solid #ebebeb;color: #444;font-size: 14px;}
+        .nlist-2 h3 {margin: 0;padding: 0 0 0 20px;font-size: 12px;font-weight: bold;color: #333;line-height: 34px;height: 34px}
+        .nlist-2 h3 i {display: inline-block;margin-right: 3px;width: 14px;height: 16px;vertical-align: middle;background: url(/images/skin_icons.png) -56px -112px no-repeat;overflow: hidden}
+        .nlist-2 ul {padding: 0 0 10px 20px;overflow:hidden;}
+        .nlist-2 p{ padding-left:20px;}
+        .nlist-2 ul:after {clear: both;content: ".";display: block;height: 0;visibility: hidden}
+        .nlist-2 ul li {float: left;margin-right: 10px;width: 32%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis}
+        a:link {
+            text-decoration: none;
+        }
+        a:visited {
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: none;
+        }
+        a:active {
+            text-decoration: none;
+        }
+    </style>
+    <script>
+
+        var url;
+        function openTab(text, url, iconCls) {
+            if ($("#tabs").tabs("exists", text)) {
+                $("#tabs").tabs("select", text);
+            } else {
+                var content = "<iframe frameborder=0 scrolling='yes' style='width:100%;height:100%;' src='" + url + "'></iframe>";
+                $("#tabs").tabs("add", {
+                    title: text,
+                    iconCls: iconCls,
+                    closable: true,
+                    content: content
+                })
+            }
+        }
+        function loginOut(){
+            $.messager.confirm('提示', '确定要退出登录吗？', function (r) {
+                if (r) {
+                    window.location.href="/login/loginOut";
+                }
+            });
+        }
+    </script>
+
+</head>
+<body class="easyui-layout">
+    <div class="top"  region="north"><span class="title">基于golang的easyui后台管理系统</span><span class="out">欢迎&nbsp;&nbsp;<a href='javascript:void(0)' onclick='about()'>admin</a>&nbsp;&nbsp;登录&nbsp;&nbsp;<a onclick="loginOut()" href="javascript:void(0)">退出</a></span></div>
+    <div region="center" style="overflow: hidden" id="center">
+        <div class="easyui-tabs" fit="true" id="tabs">
+            <div title="首页" data-options="iconCls:'icon-home'" id="main">
+                
+            </div>
+        </div>
+    </div>
+<div region="west" style="width:200px; overflow-y:auto; overflow-x:auto;;height: 500px" title="导航菜单" split="true">
+    <div class="easyui-accordion" data-options="fit:true,border:false">
+        <div title="会员管理" data-options="iconCls:'icon-wrench'" style="padding:10px">
+            <a href="javascript:openTab('会员管理','/user/index','icon-user_home')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-user_home'">会员管理</a><br/>
+        </div>
+    </div>
+</div>
+</body>
+</html>
