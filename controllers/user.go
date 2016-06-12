@@ -20,7 +20,6 @@ func (this *UserController) Index() {
 }
 
 func (this *UserController) UserIndex() {
-
 	this.TplName = "user/usermanage.html"
 }
 

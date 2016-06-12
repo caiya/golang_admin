@@ -19,7 +19,7 @@ func (this *LoginController) UserLogin() {
 	user, err := CheckLogin(username, password)
 	if err == nil {
 		this.Redirect("/main", 302)
-		user.Pass = ""
+		user.Pass = "" //将密码置空
 		fmt.Println(user)
 		this.SetSession("userinfo", user)
 	} else {
@@ -27,4 +27,9 @@ func (this *LoginController) UserLogin() {
 		this.Data["errmsg"] = err.Error()
 		this.TplName = "login.html"
 	}
+}
+
+func (this *UserController) UserExit() {
+	this.DelSession("userinfo")
+	this.Redirect("/", 302)
 }
