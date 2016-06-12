@@ -10,10 +10,17 @@ type UserController struct {
 }
 
 func (this *UserController) Index() {
-	this.TplName = "main.html"
+	user := this.GetSession("userinfo")
+	if user != nil {
+		this.Data["userinfo"] = user
+		this.TplName = "main.html"
+		return
+	}
+	this.Redirect("/", 302)
 }
 
 func (this *UserController) UserIndex() {
+
 	this.TplName = "user/usermanage.html"
 }
 

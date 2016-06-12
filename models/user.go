@@ -136,3 +136,10 @@ func UpdateUser(u *User) (int64, error) {
 	num, err := o.QueryTable(table).Filter("Id", u.Id).Update(user)
 	return num, err
 }
+
+func GetUserByUsername(username string) (user User) {
+	user = User{Name: username}
+	o := orm.NewOrm()
+	o.Read(&user, "Name")
+	return user
+}

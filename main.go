@@ -2,7 +2,7 @@ package main
 
 import (
 	_ "easyui_crud/models"
-	_ "easyui_crud/routers" //调用routes下的Init()方法来注册路由
+	_ "easyui_crud/routers" //调用routes下的init()方法来注册路由
 
 	"github.com/astaxie/beego"
 )
