@@ -20,7 +20,17 @@ func (this *UserController) UserIndex() {
 func (this *UserController) UserList() {
 	page, _ := this.GetInt64("page")
 	pageSize, _ := this.GetInt64("rows")
-	nodes, cnt := m.GetUserList(page, pageSize)
+	u := m.User{}
+	if this.GetString("id") != "" {
+		u.Id, _ = this.GetInt("id")
+	}
+	if this.GetString("name") != "" {
+		u.Name = this.GetString("name")
+	}
+	if this.GetString("phone") != "" {
+		u.Phone = this.GetString("phone")
+	}
+	nodes, cnt := m.GetUserList(page, pageSize, &u)
 	this.Data["json"] = &map[string]interface{}{"total": cnt, "rows": &nodes}
 	this.ServeJSON()
 }

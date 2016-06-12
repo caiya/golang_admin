@@ -49,14 +49,23 @@ func checkUser(u *User) (err error) {
 	return nil
 }
 
-func GetUserList(page int64, pageSize int64, u *User) (userlist []orm.Params, count int64) {
+func GetUserList(page int64, pageSize int64, user *User) (userlist []*User, count int64) {
 	o := orm.NewOrm()
 	qs := o.QueryTable("t_user")
 	var offset int64
 	if page > 1 {
 		offset = (page - 1) * pageSize
 	}
-	qs.Limit(pageSize, offset).OrderBy("-Id").Values(&userlist)
+	if user.Id != 0 {
+		qs = qs.Filter("id__exact", user.Id)
+	}
+	if user.Phone != "" {
+		qs = qs.Filter("phone__contains", user.Phone)
+	}
+	if user.Name != "" {
+		qs = qs.Filter("name__contains", user.Name)
+	}
+	qs.Limit(pageSize, offset).OrderBy("-Id").All(&userlist)
 	count, _ = qs.Count()
 	return userlist, count
 }
