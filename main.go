@@ -12,4 +12,5 @@ const VERSION = "1.0.0"
 func main() {
 	beego.AppConfig.Set("version", VERSION)
 	beego.Run() //运行程序
+
 }
